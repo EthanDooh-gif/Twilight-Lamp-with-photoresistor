@@ -1,0 +1,40 @@
+// Pin definitions
+const int ledPin = 13;   // LED output pin
+const int ldrPin = A0;   // Photoresistor (LDR) input pin
+
+void setup() {
+
+  // Start serial communication
+  Serial.begin(9600);
+
+  // Configure pin modes
+  pinMode(ledPin, OUTPUT);
+  pinMode(ldrPin, INPUT);
+}
+
+void loop() {
+
+  // Read LDR value from analog pin
+  int ldrValue = analogRead(ldrPin);
+
+  // Display sensor value on Serial Monitor
+  Serial.println(ldrValue);
+
+  // If the environment is dark
+  if (ldrValue <= 300) {
+
+    // Turn LED ON
+    digitalWrite(ledPin, HIGH);
+
+    Serial.println("LDR is DARK, LED is ON");
+  }
+  else {
+
+    // Turn LED OFF
+    digitalWrite(ledPin, LOW);
+
+    Serial.println("LDR is BRIGHT, LED is OFF");
+  }
+
+  delay(100);
+}
